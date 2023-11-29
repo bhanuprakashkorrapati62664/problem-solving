@@ -1,24 +1,24 @@
-const firstOccurance = (heystack, needle) => {
-  let occurance = null;
-  let count = 0;
-  for (let i = 0; i < heystack.length; i++) {
-    for (let j = 0; j < needle.length; j++) {
-      if (heystack[i] === needle[j] && heystack[i] === needle[0]) {
-        occurance = i;
-      }
-      if (heystack[i] === needle[j]) {
-        i += 1;
-        count++;
-      }
-    }
-    if (count === needle.length) {
-      break;
+const firstOccurance = (haystack, needle) => {
+  if (!haystack || !needle) return -1;
+  let pointer = 0;
+  let needLePointer = 0;
+  while (pointer < haystack.length) {
+    const currentHayStackLetter = haystack[pointer + needLePointer];
+    const currentNeedleLetter = needle[needLePointer];
+    if (!currentNeedleLetter) return pointer;
+    if (currentHayStackLetter === currentNeedleLetter) {
+      needLePointer++;
+    } else {
+      pointer++;
+      needLePointer = 0;
     }
   }
-  if (occurance !== null) {
-    return occurance;
-  } else {
-    return -1;
-  }
+  return -1;
 };
-console.log(firstOccurance("leetcode", "leeto"));
+console.log(firstOccurance("sadbutsad", "sad"));
+
+// l  e  e  t  c  o  d  e
+// 0  1  2  3  4  5  6  7
+
+// l  e  e  t  o
+// 0  1  2  3  4
